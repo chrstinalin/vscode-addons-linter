@@ -1,0 +1,52 @@
+{
+  "name": "vscode-addons-linter",
+  "displayName": "VS Code addons-linter",
+  "publisher": "mozilla",
+  "description": "An extension to integrate addons-linter into VSCode.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "npm run pretest && tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run format",
+    "lint": "eslint src --ext ts --fix",
+    "test": "c8 --check-coverage node ./out/test/runTest.js",
+    "prettier": "prettier --write \"src/**/*.ts\"",
+    "format": "npm run prettier && npm run lint",
+    "test:prod": "npm run test",
+    "test-all": "npm run test-dev && npm run test-prod && npm run test-stage",
+    "compile:prod": "npm run compile",
+    "build": "vsce package"
+  },
+  "devDependencies": {
+    "@types/addons-linter": "^6.16.1",
+    "@types/vscode": "^1.89.0",
+    "addons-linter": "^6.28.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-node": "^0.3.7",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "vsce": "^1.97.0",
+    "vscode": "^1.1.37",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2"
+  }
+}
